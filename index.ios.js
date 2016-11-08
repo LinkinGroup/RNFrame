@@ -1,158 +1,182 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
+ * @flow
  */
-'use strict';
+
+//var React = require('react');
 import  React, { Component } from 'react';
 import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    ListView,
-    TabBarIOS,
-    TouchableHighlight,
-    Navigator
+  View,
+  Text,
+  StyleSheet,
+  AppRegistry,
+  TabBarIOS,
+  ListView,
+  TouchableHighlight,
+  Navigator,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 
-import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
-
-export default React.createClass({
-    render() {
-        return <ScrollableTabView
-            style={{marginTop: 20, }}
-            initialPage={0}
-            renderTabBar={() => <ScrollableTabBar />}
-        >
-            <Text tabLabel='Tab #1'>My</Text>
-            <Text tabLabel='Tab #2 word word'>favorite</Text>
-            <Text tabLabel='Tab #3 word word word'>project</Text>
-            <Text tabLabel='Tab #4 word word word word'>favorite</Text>
-            <Text tabLabel='Tab #5'>project</Text>
-        </ScrollableTabView>;
+// Nav的配置，左右按钮：搜索功能
+var NavigationBarRouteMapper = {
+    LeftButton : function (route, navigator, index, navState) {
+      if (route.id === 'main') {
+        return null;
+      }
+      var previousRoute = navState.routeStack[index - 1];
+      return (
+        <TouchableOpacity
+          onPress={() => navigator.pop()}
+          style={styles.navBarLeftButton}>
+          <Text style={[styles.navBarText, styles.navBarButtonText]}>
+            返回
+          </Text>
+        </TouchableOpacity>
+      );
     },
-});
+    //搜索栏右边的按钮：
+    RightButton : function (route, navigator, index, navState) {
+      if (route.id === 'detail') {
+        return null;
+      }
+      return null;
+      //return (
+      //  <TouchableOpacity
+      //    onPress={() => navigator.push({ id : 'detail', title : 'Detail' })}
+      //    style={styles.navBarRightButton}>
+      //    <Text style={[styles.navBarText, styles.navBarButtonText]}>
+      //      Next
+      //    </Text>
+      //  </TouchableOpacity>
+      //);
+    },
 
-class AwesomeProject extends Component {
-    constructor(props){
-        super(props);
-        var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.state={
-            selectedTab: '历史',
-            notifCount: 0,
-            presses: 0,
-            historyDate: ds.cloneWithRows([{name:'jkl'}, {name:'uio'}, {name:'fda'}, {name:'uisdfgo'}]),
-        };
+    // 标题栏文字
+    Title : function (route, navigator, index, navState) {
+      return (
+        <Text style={[styles.navBarText, styles.navBarTitleText]}>
+          {route.title}
+        </Text>
+      );
     }
-    //进行渲染页面内容
-    _renderContent(color:string, pageText: string, num?: number) {
-        // 历史页面中的
-        if (this.state.selectedTab === '历史'){
-            return (
-                <View style={[styles.tabContent, {backgroundColor: color}]}>
-                    <ScrollableTabView
-                        style={{marginTop: 20, }}
-                        initialPage={0}
-                        renderTabBar={() => <ScrollableTabBar />}
-                    >
-                        <Text tabLabel='Tab #1'>
-                            <Text style={styles.tabText}>{pageText}</Text>
-                            <Text style={styles.tabText}>第 {num} 次重复渲染{pageText}</Text>
-                            <ListView style={{width:300,height:500}}
-                            dataSource={this.state.historyDate}
-                            renderRow={(rowData) => <Text style={[styles.listViewCell]}>{rowData.name}</Text>}
-                            />
-                        </Text>
-                        <Text tabLabel='Tab #2 word word'>favorite</Text>
-                        <Text tabLabel='Tab #3 word word word'>project</Text>
-                        <Text tabLabel='Tab #4 word word word word'>favorite</Text>
-                        <Text tabLabel='Tab #5'>project</Text>
-                    </ScrollableTabView>
-                </View>
-            );
-        }else{
-            return (
-            <View style={[styles.tabContent, {backgroundColor: color}]}>
-            <Text style={styles.tabText}>{pageText}</Text>
-            <Text style={styles.tabText}>第 {num} 次重复渲染{pageText}</Text>
-        </View>
-    );
+    ,
+  }
+  ;
+
+var LHWeather = React.createClass({
+  render(){
+    return (
+      <Navigator
+        style={styles.container}
+        initialRoute={{ id : "main", title : "历史" }}
+        renderScene={this.renderNav}
+        configureScene={(route, routeStack) => Navigator.SceneConfigs.HorizontalSwipeJump}
+        navigationBar={
+          <Navigator.NavigationBar
+            routeMapper={NavigationBarRouteMapper}
+            style={styles.navBar}
+          />
         }
-    }
-    render() {
-        return (
-            <View style={{flex:1}}>
-                <Text style={styles.welcome}>
-                    {this.state.selectedTab}
-                </Text>
-                <TabBarIOS
-                    style={{flex:1,alignItems:"flex-end"}}
-                    tintColor="white"
-                    barTintColor="darkslateblue">
-                    <TabBarIOS.Item
-                        title="自定义"
-                        //icon={require('./images/flux.png')}
-                        selected={this.state.selectedTab === '自定义'}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: '自定义',
-                            });
-                        }}
-                    >
-                        {this._renderContent('#414A8C', '自定义界面')}
-                    </TabBarIOS.Item>
-                    <TabBarIOS.Item
-                        systemIcon="history"
-                        selected={this.state.selectedTab === '历史'}
-                        badge={this.state.notifCount > 0 ? this.state.notifCount : undefined}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: '历史',
-                                notifCount: this.state.notifCount + 1,
-                            });
-                        }}
-                    >
-                        {this._renderContent('#ffffff', '历史记录', this.state.notifCount)}
-                    </TabBarIOS.Item>
-                    <TabBarIOS.Item
-                        systemIcon="downloads"
-                        selected={this.state.selectedTab === '下载'}
-                        onPress={() => {
-                            this.setState({
-                                selectedTab: '下载',
-                                presses: this.state.presses + 1
-                            });
-                        }}>
-                        {this._renderContent('#21551C', '下载页面', this.state.presses)}
-                    </TabBarIOS.Item>
+      />
+    );
+  },
+  renderNav(route, nav){
+    return <MainScreen navigator={nav} title="历史"/>;
+    //switch (route.id) {
+    //  case 'main':
+    //    //return null;
+    //    return <MainScreen navigator={nav} title="历史"/>;
+    //  case 'detail':
+    //    return (<DetailScreen navigator={nav} title="Detail" data={route.data}/>);
+    //}
+  }
+});
+import LogIn from './src/login';
+const defaultRoute = { component : LogIn, };
 
-                </TabBarIOS>
-            </View>
-        );
-    }
-}
-
-const styles = StyleSheet.create({
-    tabContent: {
-        flex: 1,
-        alignItems: 'center',
-    },
-    welcome: {
-        fontSize: 20,
-        backgroundColor:'#ffffff',
-        textAlign: 'center',
-        marginTop: 20,
-    },
-    tabText: {
-        color: 'white',
-        margin: 50,
-    },
-    listViewCell:{
-        fontSize:20,
-        marginLeft:9,
-        marginTop:9,
-        marginBottom:9
-    }
+var MainScreen = React.createClass({
+  toDetail(){
+    this.props.navigator.push({ id : "detail", title : "Detail", data : "Passed from Main screen" });
+  },
+  _renderScene(route, navigator) {
+    let Component = route.component;
+    return (       <Component {...route.params} navigator={navigator}/>     );
+  },
+  render(){
+    return (
+      <Navigator initialRoute={defaultRoute} renderScene={this._renderScene}/> );
+  }
 });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+var DetailScreen = React.createClass({
+  toMain(){
+    this.props.navigator.pop();
+  },
+  render(){
+    return (
+      <View style={styles.detailContainView}>
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.toMain}
+          underlayColor="green">
+          <Text style={styles.blackText}>{this.props.data}</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+});
+const styles = StyleSheet.create({
+  backImage : {
+    width : 13,
+    height : 26,
+  },
+  container : {
+    flex : 1,
+  },
+  navBar : {
+    backgroundColor : 'white',
+  },
+  button : {
+    padding : 15,
+  },
+  containView : {
+    flex : 1,
+    backgroundColor : 'gray',
+    justifyContent : 'center',
+  },
+  detailContainView : {
+    flex : 1,
+    justifyContent : 'center',
+    backgroundColor : 'green',
+  },
+  blackText : {
+    fontSize : 20,
+    textAlign : 'center',
+  },
+  navBar : {
+    backgroundColor : 'red',
+  },
+  navBarText : {
+    fontSize : 16,
+    marginVertical : 10,
+  },
+  navBarTitleText : {
+    color : '#373E4D',
+    fontWeight : '500',
+    marginVertical : 9,
+  },
+  navBarLeftButton : {
+    paddingLeft : 10,
+    paddingTop : 6,
+  },
+  navBarRightButton : {
+    paddingRight : 10,
+  },
+  navBarButtonText : {
+    color : '#5890FF',
+  },
+});
+
+AppRegistry.registerComponent('AwesomeProject', () => LHWeather);
