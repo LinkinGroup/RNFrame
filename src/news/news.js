@@ -34,12 +34,15 @@ var styles = StyleSheet.create({
     backgroundColor : '#fff'
   },
   header : {
-    height : 60,
-    backgroundColor : '#ff0000'
+    height : 64,
+    backgroundColor : '#3D96F7',
+    flexDirection : 'column',
+    justifyContent : 'center',
+    alignItems : 'center',
   },
   headerTitle : {
-    fontSize : 24,
-    color : '#ffffff',
+    fontSize : 16,
+    color : '#FFF',
     textAlign : 'center',
     marginTop : 24,
   }

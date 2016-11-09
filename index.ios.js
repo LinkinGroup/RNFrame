@@ -28,16 +28,15 @@ var facemash = React.createClass({
     return (
       <TabBarIOS>
         <TabBarIOS.Item
-          title="FaceMash"
-          icon={ require('./img/back2.png') }
+          title="资讯"
+          icon={ require('./img/nav1.png') }
           onPress={ () => this.changeTab('faceMash') }
           selected={ this.state.selectedTab === 'faceMash' }>
-
           <NewsView/>
         </TabBarIOS.Item>
         <TabBarIOS.Item
-          title="Messages"
-          icon={ require('./img/back2.png') }
+          title="课程"
+          icon={ require('./img/nav2.png') }
           onPress={ () => this.changeTab('messages') }
           selected={ this.state.selectedTab === 'messages' }>
           <View style={ styles.pageView }>
@@ -45,8 +44,8 @@ var facemash = React.createClass({
           </View>
         </TabBarIOS.Item>
         <TabBarIOS.Item
-          title="Settings"
-          icon={ require('./img/back2.png') }
+          title="我的"
+          icon={ require('./img/nav3.png') }
           onPress={ () => this.changeTab('settings') }
           selected={ this.state.selectedTab === 'settings' }>
           <View style={ styles.pageView }>
