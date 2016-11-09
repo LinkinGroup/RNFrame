@@ -21,41 +21,20 @@ class ListViewBasics extends Component {
     };
   }
 
-  _pressButton() {
-    const  navigator  = this.props;
-    //为什么这里可以取得 props.navigator?请看上文:
-    //<Component {...route.params} navigator={navigator} />
-    //这里传递了navigator作为props
-    console.log(this.props.navigator);
-    if (navigator) {
-      navigator.push('news1d1')
-    }
-  }
-
   //toNews1d1() {
   //  this.props.navigator.push({ id : "news1d1" });
   //}
 
-  //static propTypes = {
-  //  title : PropTypes.string.isRequired,
-  //  onForward : PropTypes.func.isRequired,
-  //  onBack : PropTypes.func.isRequired,
-  //}
 
   render() {
     return (
       <View style={{ flex : 1, paddingTop : 22 }}>
-        <Image
-          style={styles.pict}
-          source={require('../../img/news1Pic1.jpg')}
-        />
-        <Text style={styles.pictText}> 先锋街道社区教育中心举行《准则》《条例》宣讲</Text>
         <ListView
           style={{ width : ScreenWidth, height : 500 }}
           dataSource={this.state.dataSource}
           onPress=""
           renderRow={(rowData) =>
-            <TouchableHighlight underlayColor='rgba(24,36,35,0.1)' onPress={this._pressButton.bind(this)}>
+            <TouchableHighlight underlayColor='rgba(24,36,35,0.1)'>
               <View>
                 <Text style={[styles.listTitle]}>{ rowData.title }</Text>
                 <Text style={[styles.listDate]}>{ rowData.date }</Text>

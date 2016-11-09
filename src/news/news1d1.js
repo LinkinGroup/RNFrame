@@ -11,10 +11,11 @@ import {
 
 export default class MyScene extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
-    onForward: PropTypes.func.isRequired,
-    onBack: PropTypes.func.isRequired,
+    title : PropTypes.string.isRequired,
+    onForward : PropTypes.func.isRequired,
+    onBack : PropTypes.func.isRequired,
   }
+
   render() {
     return (
       <View>
@@ -29,8 +30,6 @@ export default class MyScene extends Component {
     )
   }
 }
-
-
 
 //export default React.createClass({
 //  render : function () {

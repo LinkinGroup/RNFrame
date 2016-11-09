@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import NewsIndex from './newsIndex';
+import Navigation from '../navigator';
 
 export default React.createClass({
   render : function () {
@@ -22,7 +23,7 @@ export default React.createClass({
         <View style={ styles.header }>
           <Text style={ styles.headerTitle }>资讯</Text>
         </View>
-        <NewsIndex/>
+        <Navigation/>
       </View>
     );
   }
@@ -34,15 +35,12 @@ var styles = StyleSheet.create({
     backgroundColor : '#fff'
   },
   header : {
-    height : 64,
-    backgroundColor : '#3D96F7',
-    flexDirection : 'column',
-    justifyContent : 'center',
-    alignItems : 'center',
+    height : 60,
+    backgroundColor : '#ff0000'
   },
   headerTitle : {
-    fontSize : 16,
-    color : '#FFF',
+    fontSize : 24,
+    color : '#ffffff',
     textAlign : 'center',
     marginTop : 24,
   }
