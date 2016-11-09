@@ -65,6 +65,15 @@ class AppNavigator extends React.Component {
           </View>
         </TabBarIOS.Item>
         <TabBarIOS.Item
+          title="圈子"
+          icon={ NAV_IMG2 }
+          onPress={ this.handleTabChange.bind(this, 'circle') }
+          selected={ this.state.selectedTab === 'circle' }>
+          <View style={ styles.container }>
+            <Text>Circle</Text>
+          </View>
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
           title="我的"
           icon={ NAV_IMG3 }
           onPress={this.handleTabChange.bind(this, 'settings')}
