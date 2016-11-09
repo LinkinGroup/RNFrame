@@ -40,7 +40,7 @@ class ListViewBasics extends Component {
         />
         <Text style={styles.pictText}> 先锋街道社区教育中心举行《准则》《条例》宣讲</Text>
         <ListView
-          style={{ width : 300, height : 500 }}
+          style={{ width : ScreenWidth, height : 500 }}
           dataSource={this.state.dataSource}
           onPress=""
           renderRow={(rowData) =>
@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
   },
   pict : {
     width : ScreenWidth,
-    //flex:1,
     resizeMode : Image.resizeMode.cover,
     height : 160,
     marginTop : -30
@@ -78,8 +77,6 @@ const styles = StyleSheet.create({
   pictText : {
     position : "absolute",
     fontSize : 12,
-    //width : ScreenWidth,
-    //flex:1,
     height : 21,
     paddingTop : 4,
     justifyContent : 'center',

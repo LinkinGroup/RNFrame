@@ -3,12 +3,16 @@ import {
   Text,
   View,
   StyleSheet,
+  Dimensions,
   ListView
 } from 'react-native';
 
 import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 import NewsList from './news1'
 import Navigation from '../navigator';
+
+var ScreenWidth = Dimensions.get('window').width;
+
 /*<View style={{ width : 300, height : 500 }}>
   <NewsList style={{ width : 300, height : 500 }}/>
 </View>*/
@@ -20,8 +24,8 @@ export default React.createClass({
       renderTabBar={() => <ScrollableTabBar />}
     >
       <Text tabLabel='新闻动态'>
-        <View style={{ width : 300, height : 500 }}>
-          <Navigation style={{ width : 300, height : 500 }}/>
+        <View style={{ width : ScreenWidth, height : 500 }}>
+          <Navigation style={{ width : ScreenWidth, height : 500 }}/>
         </View>
       </Text>
       <Text tabLabel='通知公告'>favorite</Text>
