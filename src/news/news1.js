@@ -21,17 +21,6 @@ class ListViewBasics extends Component {
     };
   }
 
-  _pressButton() {
-    const  navigator  = this.props;
-    //为什么这里可以取得 props.navigator?请看上文:
-    //<Component {...route.params} navigator={navigator} />
-    //这里传递了navigator作为props
-    console.log(this.props.navigator);
-    if (navigator) {
-      navigator.push('news1d1')
-    }
-  }
-
   //toNews1d1() {
   //  this.props.navigator.push({ id : "news1d1" });
   //}
@@ -55,11 +44,10 @@ class ListViewBasics extends Component {
           dataSource={this.state.dataSource}
           onPress=""
           renderRow={(rowData) =>
-            <TouchableHighlight underlayColor='rgba(24,36,35,0.1)' onPress={this._pressButton.bind(this)}>
+            <TouchableHighlight underlayColor='rgba(24,36,35,0.1)'>
               <View>
                 <Text style={[styles.listTitle]}>{ rowData.title }</Text>
                 <Text style={[styles.listDate]}>{ rowData.date }</Text>
-                <Text style={[styles.listLine]}> </Text>
               </View>
             </TouchableHighlight>}
         />
@@ -77,13 +65,8 @@ const styles = StyleSheet.create({
   listDate : {
     fontSize : 12,
     marginLeft : 9,
-    color : '#666',
+    color:'#666',
     marginBottom : 9
-  },
-  listLine : {
-    height : 1,
-    width : ScreenWidth,
-    backgroundColor : '#eee',
   },
   pict : {
     width : ScreenWidth,
