@@ -68,6 +68,7 @@ class ListViewBasics extends Component {
               <View>
                 <Text style={[styles.listTitle]}>{ rowData.title }</Text>
                 <Text style={[styles.listDate]}>{ rowData.date }</Text>
+                <Text style={[styles.listLine]}> </Text>
               </View>
             </TouchableHighlight>}
         />
@@ -87,6 +88,11 @@ const styles = StyleSheet.create({
     marginLeft : 9,
     color : '#666',
     marginBottom : 9
+  },
+  listLine : {
+    height : 1,
+    width : ScreenWidth,
+    backgroundColor : '#eee',
   },
   pict : {
     width : ScreenWidth,

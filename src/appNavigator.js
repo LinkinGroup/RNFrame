@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import React from 'react';
 import NewsPage from './news/newsPage';
+import NewsContent from './news/newsContent'
 const NAV_IMG1 = require('../img/nav1.png');
 const NAV_IMG2 = require('../img/nav2.png');
 const NAV_IMG3 = require('../img/nav3.png');
@@ -96,7 +97,6 @@ class AppNavigator extends React.Component {
 
   handleTabChange(tabName) {
     this.setState({ selectedTab : tabName });
-    route.title = tabName;
   }
 
   render() {
@@ -116,7 +116,7 @@ class AppNavigator extends React.Component {
 
   renderScene(route, navigator) {
     if (route.detail) {
-      return <NewsPage navigator={navigator}/>
+      return <NewsContent navigator={navigator}/>
     }
     route.title = "资讯"
     return (
