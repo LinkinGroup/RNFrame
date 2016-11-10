@@ -29,8 +29,6 @@ class ListViewBasics extends Component {
         { title : '海门市三厂社区教育中心开展法制教育进校园活动', date : '2016-11-7' },
         { title : '海门市三厂社区教育中心开展“世界勤俭日”主题活动', date : '2016-11-7' },
         { title : '海门市三厂社区教育中心开展法制教育进校园活动', date : '2016-11-7' },
-        { title : '海门市三厂社区教育中心开展“世界勤俭日”主题活动', date : '2016-11-7' },
-        { title : '海门市三厂社区教育中心开展法制教育进校园活动', date : '2016-11-7' },
         { title : '海门市三厂社区教育中心开展“世界勤俭日”主题活动', date : '2016-11-7' }
       ])
     };
@@ -53,18 +51,8 @@ class ListViewBasics extends Component {
   render() {
     return (
       <View style={[styles.flexColumn]}>
-        <TouchableHighlight onPress={this.handleSelectRow}>
-          <Image
-            onPress={this.handleSelectRow}
-            style={styles.pict}
-            source={require('../../img/news1Pic1.jpg')}
-          />
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.pictTextWra} onPress={this.handleSelectRow}>
-          <Text style={styles.pictText}> 先锋街道社区教育中心举行《准则》《条例》宣讲</Text>
-        </TouchableHighlight>
         <ListView
-          style={{ width : ScreenWidth, flex : 1 }}
+          style={{ width : ScreenWidth, flex: 1}}
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
             <TouchableHighlight underlayColor='rgba(24,36,35,0.1)' onPress={this.handleSelectRow}>
@@ -82,8 +70,7 @@ class ListViewBasics extends Component {
 const styles = StyleSheet.create({
   flexColumn : {
     flexDirection : 'column',
-    flex : 1,
-    paddingTop : 20
+    flex : 1
   },
   listTitle : {
     fontSize : 14,
@@ -101,28 +88,6 @@ const styles = StyleSheet.create({
     height : 1,
     width : ScreenWidth,
     backgroundColor : '#eee',
-  },
-  pict : {
-    width : ScreenWidth,
-    resizeMode : Image.resizeMode.cover,
-    height : 160,
-    marginTop : -17
-  },
-  pictTextWra : {
-    position : 'absolute',
-    flexDirection : 'row',
-    justifyContent : 'center',
-    marginTop : -45,
-  },
-  pictText : {
-    //height : 24,
-    paddingTop : 3,
-    paddingBottom : 3,
-    lineHeight : 18,
-    backgroundColor : "rgba(123,123,123,0.4)",
-    fontSize : 14,
-    flex : 1,
-    color : "#fff",
   }
 });
 
