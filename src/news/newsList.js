@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -12,11 +12,6 @@ import {
 var ScreenWidth = Dimensions.get('window').width;
 
 class ListViewBasics extends Component {
-  //static propTypes = {
-  //  title : PropTypes.string.isRequired,
-  //  onForward : PropTypes.func.isRequired,
-  //  onBack : PropTypes.func.isRequired,
-  //}
 
   // 初始化模拟数据
   constructor(props) {
@@ -52,14 +47,16 @@ class ListViewBasics extends Component {
   render() {
     return (
       <View style={{ flex : 1, paddingTop : 22 }}>
-        <Image
-          style={styles.pict}
-          source={require('../../img/news1Pic1.jpg')}
-        />
-        <TouchableHighlight underlayColor='rgba(24,36,35,0.1)' onPress={this.handleBack}>
-          <Text style={styles.pictText}> 测试返回</Text>
+        <TouchableHighlight onPress={this.handleSelectRow}>
+          <Image
+            onPress={this.handleSelectRow}
+            style={styles.pict}
+            source={require('../../img/news1Pic1.jpg')}
+          />
         </TouchableHighlight>
-        <Text style={styles.pictText}> 先锋街道社区教育中心举行《准则》《条例》宣讲</Text>
+        <TouchableHighlight style={styles.pictTextWra} onPress={this.handleSelectRow}>
+          <Text style={styles.pictText}> 先锋街道社区教育中心举行《准则》《条例》宣讲</Text>
+        </TouchableHighlight>
         <ListView
           style={{ width : ScreenWidth, height : 500 }}
           dataSource={this.state.dataSource}
@@ -100,12 +97,20 @@ const styles = StyleSheet.create({
     height : 160,
     marginTop : -30
   },
-  pictText : {
-    height : 21,
-    fontSize : 12,
+  pictTextWra : {
+    position : 'absolute',
+    flexDirection : 'row',
     justifyContent : 'center',
-    alignItems : 'center',
-    backgroundColor : "rgba(123,123,123,0.5)",
+    marginTop : -45,
+  },
+  pictText : {
+    //height : 24,
+    paddingTop : 3,
+    paddingBottom : 3,
+    lineHeight : 18,
+    backgroundColor : "rgba(123,123,123,0.4)",
+    fontSize : 14,
+    flex : 1,
     color : "#fff",
   }
 });

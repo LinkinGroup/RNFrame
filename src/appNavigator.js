@@ -77,7 +77,7 @@ let NavigationBarRouteMapper = {
   },
   // 标题
   Title(route, navigator, index, navState) {
-    console.log(route);
+    //console.log(route);
     return (
       <View style={ styles.header }>
         <Text style={ styles.headerTitle }>{route.title}</Text>
