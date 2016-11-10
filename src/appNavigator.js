@@ -10,7 +10,8 @@ import {
 } from 'react-native'
 import React from 'react';
 import NewsPage from './news/newsPage';
-import NewsContent from './news/newsContent'
+import NewsContent from './news/newsContent';
+import CoursePage from './course/coursePage';
 const NAV_IMG1 = require('../img/nav1.png');
 const NAV_IMG2 = require('../img/nav2.png');
 const NAV_IMG3 = require('../img/nav3.png');
@@ -117,6 +118,8 @@ class AppNavigator extends React.Component {
   renderScene(route, navigator) {
     if (route.detail) {
       return <NewsContent navigator={navigator}/>
+    }else if(route.videoPage){
+      return <NewsContent navigator={navigator}/>
     }
     route.title = "资讯"
     return (
@@ -134,7 +137,7 @@ class AppNavigator extends React.Component {
           onPress={ this.handleTabChange.bind(this, 'messages') }
           selected={ this.state.selectedTab === 'messages' }>
           <View style={ styles.container }>
-            <Text>Messages</Text>
+            <CoursePage navigator={navigator}/>
           </View>
         </TabBarIOS.Item>
         <TabBarIOS.Item
