@@ -42,7 +42,7 @@ class ListViewBasics extends Component {
   //}
 
   handleSelectRow() {
-    this.props.navigator.push({ detail : true });
+    this.props.navigator.push({ detail : true, title : "资讯详情" });
   }
 
   handleBack() {

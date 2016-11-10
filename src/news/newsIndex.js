@@ -17,7 +17,7 @@ var ScreenWidth = Dimensions.get('window').width;
  </View>*/
 export default React.createClass({
   render() {
-    return <ScrollableTabView style={{ marginTop : 0 }}
+    return <ScrollableTabView style={{ marginTop : 64 }}
                               tabBarActiveTextColor="#3D96F7"
                               tabBarInactiveTextColor="#3D96F7"
                               tabBarUnderlineStyle={{ backgroundColor : "#3D96F7", borderColor : "#3D96F7" }}

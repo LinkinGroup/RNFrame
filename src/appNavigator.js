@@ -6,6 +6,7 @@ import {
   View,
   TabBarIOS,
   Navigator,
+  TouchableOpacity
 } from 'react-native'
 import React from 'react';
 import NewsPage from './news/newsPage';
@@ -18,7 +19,71 @@ var styles = StyleSheet.create({
     flex : 1,
     backgroundColor : 'black',
   },
+  navContainer : {
+    flex : 1,
+    height : 64,
+    backgroundColor : '#3D96F7',
+    //flexDirection : 'column',
+    //justifyContent : 'center',
+    //alignItems : 'center',
+  },
+  header : {
+    flexDirection : 'column',
+    justifyContent : 'center',
+    alignItems : 'center',
+  },
+  headerTitle : {
+    fontSize : 24,
+    color : '#FFF',
+    textAlign : 'center',
+    marginTop : 3,
+  },
+  leftNavButtonText : {
+    fontSize : 18,
+    color : '#FFF',
+    marginTop : 10,
+    marginLeft : 10,
+    ////height : 18,
+    //flexDirection : 'column',
+    //justifyContent : 'center',
+    alignItems : 'center',
+  },
 });
+
+// 路由设置：导航栏的Mapper
+let NavigationBarRouteMapper = {
+  // 左键
+  LeftButton(route, navigator, index, navState) {
+    if (index > 0) {
+      return (
+        <View style={styles.navContainer}>
+          <TouchableOpacity
+            underlayColor='transparent'
+            onPress={() => {if (index > 0) {navigator.pop()}}}>
+            <Text style={styles.leftNavButtonText}>
+              后退
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return null;
+    }
+  },
+  // 右键
+  RightButton(route, navigator, index, navState) {
+    // ...
+  },
+  // 标题
+  Title(route, navigator, index, navState) {
+    console.log(route);
+    return (
+      <View style={ styles.header }>
+        <Text style={ styles.headerTitle }>{route.title}</Text>
+      </View>
+    );
+  }
+};
 
 class AppNavigator extends React.Component {
   constructor(props) {
@@ -31,6 +96,7 @@ class AppNavigator extends React.Component {
 
   handleTabChange(tabName) {
     this.setState({ selectedTab : tabName });
+    route.title = tabName;
   }
 
   render() {
@@ -39,6 +105,12 @@ class AppNavigator extends React.Component {
       style={styles.container}
       initialRoute={{}}
       renderScene={this.renderScene}
+      navigationBar={
+        <Navigator.NavigationBar
+          style={styles.navContainer}
+          routeMapper={NavigationBarRouteMapper}
+        />
+      }
     />
   }
 
@@ -46,6 +118,7 @@ class AppNavigator extends React.Component {
     if (route.detail) {
       return <NewsPage navigator={navigator}/>
     }
+    route.title = "资讯"
     return (
       <TabBarIOS>
         <TabBarIOS.Item

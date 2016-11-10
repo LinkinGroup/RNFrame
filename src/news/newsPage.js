@@ -14,19 +14,19 @@ var styles = StyleSheet.create({
     flex : 1,
     backgroundColor : '#fff'
   },
-  header : {
-    height : 64,
-    backgroundColor : '#3D96F7',
-    flexDirection : 'column',
-    justifyContent : 'center',
-    alignItems : 'center',
-  },
-  headerTitle : {
-    fontSize : 16,
-    color : '#FFF',
-    textAlign : 'center',
-    marginTop : 24,
-  }
+  //header : {
+  //  height : 64,
+  //  backgroundColor : '#000',
+  //  flexDirection : 'column',
+  //  justifyContent : 'center',
+  //  alignItems : 'center',
+  //},
+  //headerTitle : {
+  //  fontSize : 24,
+  //  color : '#FFF',
+  //  textAlign : 'center',
+  //  marginTop : 24,
+  //}
 });
 
 class NewsPage extends React.Component {
@@ -41,9 +41,9 @@ class NewsPage extends React.Component {
           backgroundColor="blue"
           barStyle="light-content"
         />
-        <View style={ styles.header }>
-          <Text style={ styles.headerTitle }>资讯</Text>
-        </View>
+        {/*<View style={ styles.header }>*/}
+        {/*<Text style={ styles.headerTitle }>资讯</Text>*/}
+        {/*</View>*/}
         <NewsIndex navigator={this.props.navigator}/>
       </View>
     );

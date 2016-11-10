@@ -27,6 +27,7 @@ class App extends React.Component {
       <View style={styles.container}>
         <StatusBar
           translucent={true}
+          // backgroundColor属性只在安卓系统显示相应效果
           backgroundColor="rgba(0, 0, 0, 0.2)"
           barStyle="light-content"
         />
