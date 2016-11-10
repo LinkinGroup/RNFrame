@@ -12,6 +12,8 @@ import React from 'react';
 import NewsPage from './news/newsPage';
 import NewsContent from './news/newsContent';
 import CoursePage from './course/coursePage';
+import CourseContent from './course/courseContent';
+import VideoPlay from './course/videoPlay';
 const NAV_IMG1 = require('../img/nav1.png');
 const NAV_IMG2 = require('../img/nav2.png');
 const NAV_IMG3 = require('../img/nav3.png');
@@ -25,20 +27,16 @@ var styles = StyleSheet.create({
     flex : 1,
     height : 64,
     backgroundColor : '#3D96F7',
-    //flexDirection : 'column',
-    //justifyContent : 'center',
-    //alignItems : 'center',
   },
   header : {
+    flex : 1,
     flexDirection : 'column',
     justifyContent : 'center',
     alignItems : 'center',
   },
   headerTitle : {
-    fontSize : 24,
+    fontSize : 16,
     color : '#FFF',
-    textAlign : 'center',
-    marginTop : 3,
   },
   leftNavButtonText : {
     fontSize : 18,
@@ -118,8 +116,10 @@ class AppNavigator extends React.Component {
   renderScene(route, navigator) {
     if (route.detail) {
       return <NewsContent navigator={navigator}/>
-    }else if(route.videoPage){
-      return <NewsContent navigator={navigator}/>
+    } else if (route.videoPage) {
+      return <CourseContent navigator={navigator}/>
+    } else if (route.videoPlay) {
+      return <VideoPlay navigator={navigator}/>
     }
     route.title = "资讯"
     return (
