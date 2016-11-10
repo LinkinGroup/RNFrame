@@ -12,6 +12,8 @@ import React from 'react';
 import NewsPage from './news/newsPage';
 import NewsContent from './news/newsContent';
 import CoursePage from './course/coursePage';
+import CourseContent from './course/courseContent';
+import VideoPlay from './course/videoPlay';
 const NAV_IMG1 = require('../img/nav1.png');
 const NAV_IMG2 = require('../img/nav2.png');
 const NAV_IMG3 = require('../img/nav3.png');
@@ -119,7 +121,9 @@ class AppNavigator extends React.Component {
     if (route.detail) {
       return <NewsContent navigator={navigator}/>
     }else if(route.videoPage){
-      return <NewsContent navigator={navigator}/>
+      return <CourseContent navigator={navigator}/>
+    }else if(route.videoPlay){
+      return <VideoPlay navigator={navigator}/>
     }
     route.title = "资讯"
     return (
