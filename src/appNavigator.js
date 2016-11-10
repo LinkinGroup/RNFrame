@@ -27,20 +27,16 @@ var styles = StyleSheet.create({
     flex : 1,
     height : 64,
     backgroundColor : '#3D96F7',
-    //flexDirection : 'column',
-    //justifyContent : 'center',
-    //alignItems : 'center',
   },
   header : {
+    flex : 1,
     flexDirection : 'column',
     justifyContent : 'center',
     alignItems : 'center',
   },
   headerTitle : {
-    fontSize : 24,
+    fontSize : 16,
     color : '#FFF',
-    textAlign : 'center',
-    marginTop : 3,
   },
   leftNavButtonText : {
     fontSize : 18,
@@ -120,9 +116,9 @@ class AppNavigator extends React.Component {
   renderScene(route, navigator) {
     if (route.detail) {
       return <NewsContent navigator={navigator}/>
-    }else if(route.videoPage){
+    } else if (route.videoPage) {
       return <CourseContent navigator={navigator}/>
-    }else if(route.videoPlay){
+    } else if (route.videoPlay) {
       return <VideoPlay navigator={navigator}/>
     }
     route.title = "资讯"
